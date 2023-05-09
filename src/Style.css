@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Pacifico', cursive;
+    background: linear-gradient(45deg,#a29bfe,#55efc4);
+}
+
+.WeatherForm{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #0984e3,#81ecec,#74b9ff);
+    width: 450px;
+    height: 80px;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    margin-bottom: 40px;
+}
+
+.form-rac1{
+    width: 80%;
+    height: 30px;
+    font-size: 17px;
+    padding-left: 20px;
+   
+}
+.button-icon {
+    width: 10%;
+    height: 30px;
+    margin-left: 5px;
+    
+}
+
+.Up {
+    
+    background: linear-gradient(30deg,#81ecec,#0984e3,#00cec9);
+    height: 100%;
+    color:  #fff;
+    border-radius: 13px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 17px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+}
+.Up .row1 h1{
+    text-align: center;
+    padding: 35px 0px;
+}
+.Up .row1 p{
+    font-size: 17px;
+}
+.Up .row2 {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 0px;
+    position: relative;
+   
+}
+.Up .row2 h1{
+    font-size: 25px;
+}
+.Up .row2 img {
+    width: 60%;
+    position: absolute;
+    left: 50%;
+    top: -30%
+    
+}
+.Up .row3 h1 {
+    font-size: 25px;
+}
+.Up .row3 p{
+    font-size: 15px;
+}
