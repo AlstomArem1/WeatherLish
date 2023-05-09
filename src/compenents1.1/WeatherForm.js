@@ -18,15 +18,23 @@ export default function WeatherForm() {
                 setData(res.data);
             })
             .catch((error) => {
-               if(error.response.status === "404") {
+                if(error.response.status === "404") {
                     setError("invalid city name");
                 }
-            })
+            });
     };
     useEffect(() => {
         getData();
     }, []);
-
+    const time = new Date().toLocaleTimeString();
+    const [currentTime, setcurrentTime] = useState(time);
+    const updateTime = () => {
+        const time = new Date().toLocaleTimeString();
+        setcurrentTime(time)
+    }
+    setInterval(updateTime,1000);
+    const date = new Date().toDateString();
+    
     return (
         <div>
             <form className="WeatherForm">
@@ -43,21 +51,24 @@ export default function WeatherForm() {
                         }
                     }}
                 >
+                    
                 </input>
+               
                 <button className="button-icon" onClick={(e) => {
                     e.preventDefault();
                     getData();
                     setText("");
                 }}><Weathericon /></button>
             </form>
+           
             <div className="Up">
                 <div className="row1">
                     <h1> {data && data.name}</h1>
                     <p><FaMapMarkerAlt /> {data && data.name}</p>
-                    <p><FaCalendarDay /> DayTime | Monday</p>
+                    <p><FaCalendarDay /> {currentTime} | {date}</p>
                 </div>
                 <div className="row2">
-                    <h1>{data && (data.wind.deg)}<sup>o</sup>C | {data && Math.round((data.wind.deg) - 32 / 1.8)}<sup>o</sup>F
+                    <h1>{data && Math.round(data.main.temp - 273.15)}<sup>o</sup>C | {data && Math.round((data.main.temp - 273.15)*1.8+32)}<sup>o</sup>F  
                     </h1>
                     <img
                         src={data && `https://api.openweathermap.org/img/w/${data.weather[0].icon}`}
