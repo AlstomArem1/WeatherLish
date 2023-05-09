@@ -5,6 +5,7 @@ import { FaMapMarkerAlt, FaCalendarDay } from "react-icons/fa";
 export default function WeatherForm() {
     const [text, setText] = useState("Ho Chi Minh City");
     const [data, setData] = useState(null);
+    const [error, setError] = useState("")
 
     const getData = async () => {
         const APIkey = "e0ddc538b3415427caeb7901218a30dd";
@@ -17,7 +18,9 @@ export default function WeatherForm() {
                 setData(res.data);
             })
             .catch((error) => {
-                console.log(error);
+               if(error.response.status === "404") {
+                    setError("invalid city name");
+                }
             })
     };
     useEffect(() => {
