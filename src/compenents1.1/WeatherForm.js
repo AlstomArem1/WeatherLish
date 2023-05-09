@@ -3,13 +3,13 @@ import Weathericon from "./Weathericon";
 import axios from "axios";
 import { FaMapMarkerAlt, FaCalendarDay } from "react-icons/fa";
 export default function WeatherForm() {
-    const [text, setText] = useState("");
+    const [text, setText] = useState("Ho Chi Minh City");
     const [data, setData] = useState(null);
 
     const getData = async () => {
         const APIkey = "e0ddc538b3415427caeb7901218a30dd";
-        const cityname = "seoul";
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=${APIkey}`;
+
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${text}&appid=${APIkey}`;
         axios
             .get(url)
             .then((res) => {
@@ -17,7 +17,7 @@ export default function WeatherForm() {
                 setData(res.data);
             })
             .catch((error) => {
-                console.log(error.data);
+                console.log(error);
             })
     };
     useEffect(() => {
@@ -34,18 +34,23 @@ export default function WeatherForm() {
                     onChange={(e) => setText(e.target.value)}
                     onKeyPress={(e) => {
                         if (e.key === "Enter" && text) {
+                            e.preventDefault();
                             getData();
                             setText("");
                         }
                     }}
                 >
                 </input>
-                <button className="button-icon"><Weathericon /></button>
+                <button className="button-icon" onClick={(e) => {
+                    e.preventDefault();
+                    getData();
+                    setText("");
+                }}><Weathericon /></button>
             </form>
             <div className="Up">
                 <div className="row1">
-                    <h1>Your Location</h1>
-                    <p><FaMapMarkerAlt /> Location</p>
+                    <h1> {data && data.name}</h1>
+                    <p><FaMapMarkerAlt /> {data && data.name}</p>
                     <p><FaCalendarDay /> DayTime | Monday</p>
                 </div>
                 <div className="row2">
@@ -56,10 +61,14 @@ export default function WeatherForm() {
                     ></img>
                 </div>
                 <div className="row3">
-                    <h1>{data && data.weather[0].description}</h1>
-                    <p>City: {data && data.name}</p>
-                    <p>Temp: {data && data.main.temp}</p>
-                    <p>Country: {data && data.sys.country}</p>
+                    {data && (
+                        <>
+                            <h1>{ data.weather[0].description}</h1>
+                            <p>City: { data.name}</p>
+                            <p>Temp: { data.main.temp}</p>
+                            <p>Country: { data.sys.country}</p>
+                        </>
+                    )}
                 </div>
 
             </div>
